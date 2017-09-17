@@ -1,6 +1,6 @@
 {
     "name": "spatie/macroable",
-    "description": "A trait to dynamically add functions to a class",
+    "description": "A trait to dynamically add methods to a class",
     "keywords": [
         "spatie",
         "macroable"
