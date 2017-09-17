@@ -65,7 +65,7 @@ $macroableClass = new class() {
     protected $name = 'myName';
     
     use Spatie\Macroable\Macroable;
-}
+};
 
 $macroableClass::macro('getName', function() {
    return $this->name;
