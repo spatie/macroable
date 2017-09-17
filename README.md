@@ -22,7 +22,7 @@ $myClass::macro('concatinate', function(... $strings) {
 $myClass->concatinate('one', 'two', 'three'); // returns 'one-two-three'
 ```
 
-The idea of a macroable trait and the implementation is taken from [the `macroable ` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com)
+The idea of a macroable trait and the implementation is taken from [the `macroable ` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com).
 
 
 ## Postcardware
@@ -90,7 +90,9 @@ $mixin = new class() {
 };
 
 $macroableClass->mixin($mixin);
+
 $macroableClass->mixinMethod() // returns 'mixinMethod';
+
 $macroableClass->anotherMixinMethod() // returns 'anotherMixinMethod';
 ```
 
@@ -117,7 +119,7 @@ If you discover any security related issues, please email freek@spatie.be instea
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
-Idea and code is taken from [the `macroable ` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com)
+Idea and code is taken from [the `macroable ` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com).
 
 ## About Spatie
 
