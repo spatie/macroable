@@ -1,6 +1,24 @@
 # A trait to dynamically add functions to a class
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This package provides a trait that, when applied to a class, makes it possible to add methods to that class at runtime.
+
+Here's a quick example.
+
+```php
+$myClass = new class() {
+    
+    use Spatie\Macroable\Macroable;
+}
+
+$myClass::macro('concatinate', function(... $strings) {
+   return implode('-', $strings);
+}
+
+$myClass->concatinate('one', 'two', 'three'); // returns 'one-two-three'
+```
+
+The idea of a macroable trait and the implementation is taken from [the `macroable ` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com)
+
 
 ## Postcardware
 
@@ -20,9 +38,56 @@ composer require spatie/macroable
 
 ## Usage
 
-``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+You can add a new method to a class using `macro`:
+
+```php
+$macroableClass = new class() {
+    
+    use Spatie\Macroable\Macroable;
+}
+
+$macroableClass::macro('concatinate', function(... $strings) {
+   return implode('-', $strings);
+}
+
+$myClass->concatinate('one', 'two', 'three'); // returns 'one-two-three'
+```
+
+Callables passed to the `macro` function will be bound to the `class`
+
+```php
+$macroableClass = new class() {
+    
+    protected $name = 'myName';
+    
+    use Spatie\Macroable\Macroable;
+}
+
+$macroableClass::macro('getName', function() {
+   return $this->name;
+}
+
+$macroableClass->getName(); // returns 'myName'
+```
+
+You can also add multiple methods in one go my using a mixin class. A mixin class contains methods that return callables. Each method from the mixin will be registered on the macroable class.
+
+```php
+$mixin = new class() {
+    public function mixinMethod()
+    {
+       return 'mixinMethod';
+    }
+    
+    public function anotherMixinMethod()
+    {
+       return 'anotherMixinMethod';
+    }
+}
+
+$macroableClass->mixin($mixin);
+$macroableClass->mixinMethod() // returns 'mixinMethod';
+$macroableClass->anotherMixinMethod() // returns 'anotherMixinMethod';
 ```
 
 ## Changelog
@@ -48,7 +113,7 @@ If you discover any security related issues, please email freek@spatie.be instea
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
-Idea and code taken from [the `macroable ` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com)
+Idea and code is taken from [the `macroable ` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com)
 
 ## About Spatie
 
