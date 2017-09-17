@@ -15,11 +15,11 @@ $myClass = new class() {
     use Spatie\Macroable\Macroable;
 };
 
-$myClass::macro('concatinate', function(... $strings) {
+$myClass::macro('concatenate', function(... $strings) {
    return implode('-', $strings);
 };
 
-$myClass->concatinate('one', 'two', 'three'); // returns 'one-two-three'
+$myClass->concatenate('one', 'two', 'three'); // returns 'one-two-three'
 ```
 
 The idea of a macroable trait and the implementation is taken from [the `macroable ` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com).
@@ -50,11 +50,11 @@ $macroableClass = new class() {
     use Spatie\Macroable\Macroable;
 };
 
-$macroableClass::macro('concatinate', function(... $strings) {
+$macroableClass::macro('concatenate', function(... $strings) {
    return implode('-', $strings);
 };
 
-$myClass->concatinate('one', 'two', 'three'); // returns 'one-two-three'
+$myClass->concatenate('one', 'two', 'three'); // returns 'one-two-three'
 ```
 
 Callables passed to the `macro` function will be bound to the `class`

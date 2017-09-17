@@ -39,11 +39,11 @@ class MacroableTest extends TestCase
     /** @test */
     public function it_passes_parameters_correctly()
     {
-        $this->macroableClass::macro('concatinate', function (...$strings) {
+        $this->macroableClass::macro('concatenate', function (...$strings) {
             return implode('-', $strings);
         });
 
-        $this->assertEquals('one-two-three', $this->macroableClass->concatinate('one', 'two', 'three'));
+        $this->assertEquals('one-two-three', $this->macroableClass->concatenate('one', 'two', 'three'));
     }
 
     /** @test */
