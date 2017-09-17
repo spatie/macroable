@@ -12,13 +12,12 @@ Here's a quick example.
 
 ```php
 $myClass = new class() {
-    
     use Spatie\Macroable\Macroable;
-}
+};
 
 $myClass::macro('concatinate', function(... $strings) {
    return implode('-', $strings);
-}
+};
 
 $myClass->concatinate('one', 'two', 'three'); // returns 'one-two-three'
 ```
@@ -48,13 +47,12 @@ You can add a new method to a class using `macro`:
 
 ```php
 $macroableClass = new class() {
-    
     use Spatie\Macroable\Macroable;
-}
+};
 
 $macroableClass::macro('concatinate', function(... $strings) {
    return implode('-', $strings);
-}
+};
 
 $myClass->concatinate('one', 'two', 'three'); // returns 'one-two-three'
 ```
@@ -71,7 +69,7 @@ $macroableClass = new class() {
 
 $macroableClass::macro('getName', function() {
    return $this->name;
-}
+};
 
 $macroableClass->getName(); // returns 'myName'
 ```
@@ -89,7 +87,7 @@ $mixin = new class() {
     {
        return 'anotherMixinMethod';
     }
-}
+};
 
 $macroableClass->mixin($mixin);
 $macroableClass->mixinMethod() // returns 'mixinMethod';
