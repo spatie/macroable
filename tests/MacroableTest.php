@@ -14,8 +14,7 @@ class MacroableTest extends TestCase
     {
         parent::setUp();
 
-        $this->macroableClass = new class()
-        {
+        $this->macroableClass = new class() {
             private $privateVariable = 'privateValue';
 
             use Macroable;
@@ -30,7 +29,7 @@ class MacroableTest extends TestCase
     /** @test */
     public function a_new_macro_can_be_registered_and_called()
     {
-        $this->macroableClass::macro('newMethod', function() {
+        $this->macroableClass::macro('newMethod', function () {
             return 'newValue';
         });
 
@@ -40,7 +39,7 @@ class MacroableTest extends TestCase
     /** @test */
     public function it_passes_parameters_correctly()
     {
-        $this->macroableClass::macro('concatinate', function(... $strings) {
+        $this->macroableClass::macro('concatinate', function (...$strings) {
             return implode('-', $strings);
         });
 
@@ -50,7 +49,7 @@ class MacroableTest extends TestCase
     /** @test */
     public function registered_methods_are_bound_to_the_class()
     {
-        $this->macroableClass::macro('newMethod', function() {
+        $this->macroableClass::macro('newMethod', function () {
             return $this->privateVariable;
         });
 
@@ -60,7 +59,7 @@ class MacroableTest extends TestCase
     /** @test */
     public function it_can_work_on_static_methods()
     {
-        $this->macroableClass::macro('testStatic', function() {
+        $this->macroableClass::macro('testStatic', function () {
             return $this::getPrivateStatic();
         });
 
