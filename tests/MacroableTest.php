@@ -1,7 +1,8 @@
 <?php
 
-namespace Spatie\Skeleton\Test;
+namespace Spatie\Macroable\Test;
 
+use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Macroable\Macroable;
 
@@ -37,6 +38,16 @@ class MacroableTest extends TestCase
     }
 
     /** @test */
+    public function it_passes_parameters_correctly()
+    {
+        $this->macroableClass::macro('concatinate', function(... $strings) {
+            return implode('-', $strings);
+        });
+
+        $this->assertEquals('one-two-three', $this->macroableClass->concatinate('one', 'two', 'three'));
+    }
+
+    /** @test */
     public function registered_methods_are_bound_to_the_class()
     {
         $this->macroableClass::macro('newMethod', function() {
@@ -64,7 +75,15 @@ class MacroableTest extends TestCase
         $this->assertEquals('privateValue-test', $this->macroableClass->mixinMethodA('test'));
     }
 
-    public function getMixinClass()
+    /** @test */
+    public function it_will_throw_an_exception_if_a_method_does_not_exist()
+    {
+        $this->expectException(BadMethodCallException::class);
+
+        $this->macroableClass->nonExistingMethod();
+    }
+
+    protected function getMixinClass()
     {
         return new class() {
             private function secretMixinMethod()
