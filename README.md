@@ -8,7 +8,7 @@
 
 This package provides a trait that, when applied to a class, makes it possible to add methods to that class at runtime.
 
-Here's a quick example.
+Here's a quick example:
 
 ```php
 $myClass = new class() {
