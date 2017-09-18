@@ -37,6 +37,30 @@ class MacroableTest extends TestCase
     }
 
     /** @test */
+    public function a_new_macro_can_be_registered_and_called_statically()
+    {
+        $this->macroableClass::macro('newMethod', function () {
+            return 'newValue';
+        });
+
+        $this->assertEquals('newValue', $this->macroableClass::newMethod());
+    }
+
+    /** @test */
+    public function a_class_can_be_registered_as_a_new_macro_and_be_invoked()
+    {
+        $this->macroableClass::macro('newMethod', new class() {
+            public function __invoke()
+            {
+                return 'newValue';
+            }
+        });
+
+        $this->assertEquals('newValue', $this->macroableClass->newMethod());
+        $this->assertEquals('newValue', $this->macroableClass::newMethod());
+    }
+
+    /** @test */
     public function it_passes_parameters_correctly()
     {
         $this->macroableClass::macro('concatenate', function (...$strings) {
@@ -80,6 +104,14 @@ class MacroableTest extends TestCase
         $this->expectException(BadMethodCallException::class);
 
         $this->macroableClass->nonExistingMethod();
+    }
+
+    /** @test */
+    public function it_will_throw_an_exception_if_a_static_method_does_not_exist()
+    {
+        $this->expectException(BadMethodCallException::class);
+
+        $this->macroableClass::nonExistingMethod();
     }
 
     protected function getMixinClass()
