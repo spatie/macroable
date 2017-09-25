@@ -80,12 +80,16 @@ You can also add multiple methods in one go my using a mixin class. A mixin clas
 $mixin = new class() {
     public function mixinMethod()
     {
-       return 'mixinMethod';
+       return function() {
+          return 'mixinMethod';
+       };
     }
     
     public function anotherMixinMethod()
     {
-       return 'anotherMixinMethod';
+       return function() {
+          return 'anotherMixinMethod';
+       };
     }
 };
 
