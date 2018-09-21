@@ -45,7 +45,7 @@ $macroableClass::macro('concatenate', function(... $strings) {
    return implode('-', $strings);
 };
 
-$myClass->concatenate('one', 'two', 'three'); // returns 'one-two-three'
+$macroableClass->concatenate('one', 'two', 'three'); // returns 'one-two-three'
 ```
 
 Callables passed to the `macro` function will be bound to the `class`
@@ -93,7 +93,7 @@ $macroableClass->anotherMixinMethod() // returns 'anotherMixinMethod';
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Testing
 
