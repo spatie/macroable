@@ -22,7 +22,7 @@ $myClass::macro('concatenate', function(... $strings) {
 $myClass->concatenate('one', 'two', 'three'); // returns 'one-two-three'
 ```
 
-The idea of a macroable trait and the implementation is taken from [the `macroable` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com).
+The idea of a macroable trait and the implementation is taken from [the `macroable` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [Laravel framework](https://laravel.com).
 
 ## Installation
 
@@ -122,7 +122,7 @@ We publish all received postcards [on our company website](https://spatie.be/en/
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
-Idea and code is taken from [the `macroable` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [the Laravel framework](https://laravel.com).
+Idea and code is taken from [the `macroable` trait](https://github.com/laravel/framework/blob/master/src/Illuminate/Support/Traits/Macroable.php) of the [Laravel framework](https://laravel.com).
 
 ## Support us
 
