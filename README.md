@@ -16,7 +16,7 @@ $myClass = new class() {
 
 $myClass::macro('concatenate', function(... $strings) {
    return implode('-', $strings);
-};
+});
 
 $myClass->concatenate('one', 'two', 'three'); // returns 'one-two-three'
 ```
