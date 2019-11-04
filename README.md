@@ -64,7 +64,7 @@ $macroableClass::macro('getName', function() {
 $macroableClass->getName(); // returns 'myName'
 ```
 
-You can also add multiple methods in one go my using a mixin class. A mixin class contains methods that return callables. Each method from the mixin will be registered on the macroable class.
+You can also add multiple methods in one go by using a mixin class. A mixin class contains methods that return callables. Each method from the mixin will be registered on the macroable class.
 
 ```php
 $mixin = new class() {
