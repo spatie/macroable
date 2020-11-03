@@ -10,7 +10,7 @@ class MacroableTest extends TestCase
 {
     protected $macroableClass;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
