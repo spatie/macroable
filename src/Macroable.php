@@ -2,10 +2,10 @@
 
 namespace Spatie\Macroable;
 
+use BadMethodCallException;
 use Closure;
 use ReflectionClass;
 use ReflectionMethod;
-use BadMethodCallException;
 
 trait Macroable
 {
@@ -14,8 +14,8 @@ trait Macroable
     /**
      * Register a custom macro.
      *
-     * @param  string $name
-     * @param  object|callable  $macro
+     * @param string          $name
+     * @param object|callable $macro
      */
     public static function macro(string $name, $macro)
     {
@@ -25,7 +25,7 @@ trait Macroable
     /**
      * Mix another object into the class.
      *
-     * @param  object  $mixin
+     * @param object $mixin
      */
     public static function mixin($mixin)
     {
@@ -47,7 +47,7 @@ trait Macroable
 
     public static function __callStatic($method, $parameters)
     {
-        if (! static::hasMacro($method)) {
+        if (!static::hasMacro($method)) {
             throw new BadMethodCallException("Method {$method} does not exist.");
         }
 
@@ -62,7 +62,7 @@ trait Macroable
 
     public function __call($method, $parameters)
     {
-        if (! static::hasMacro($method)) {
+        if (!static::hasMacro($method)) {
             throw new BadMethodCallException("Method {$method} does not exist.");
         }
 
