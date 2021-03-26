@@ -9,25 +9,14 @@ use BadMethodCallException;
 
 trait Macroable
 {
-    protected static $macros = [];
+    protected static array $macros = [];
 
-    /**
-     * Register a custom macro.
-     *
-     * @param  string $name
-     * @param  object|callable  $macro
-     */
-    public static function macro(string $name, $macro)
+    public static function macro(string $name, object | callable $macro): void
     {
         static::$macros[$name] = $macro;
     }
 
-    /**
-     * Mix another object into the class.
-     *
-     * @param  object  $mixin
-     */
-    public static function mixin($mixin)
+    public static function mixin(object | string $mixin): void
     {
         $methods = (new ReflectionClass($mixin))->getMethods(
             ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_PROTECTED
