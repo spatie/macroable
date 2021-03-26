@@ -2,7 +2,7 @@
 
 All notable changes to `macroable` will be documented in this file
 
-## 2.0.0 - unreleased
+## 2.0.0 - 2021-03-26
 
 - require PHP 8+
 - drop support for PHP 7.x
