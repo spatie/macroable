@@ -7,26 +7,35 @@ use ReflectionClass;
 use ReflectionMethod;
 use BadMethodCallException;
 
+use TypeError;
+
 trait Macroable
 {
     protected static array $macros = [];
 
-    public static function macro(string $name, object | callable $macro): void
+    public static function macro(string $name, $macro): void
     {
-        static::$macros[$name] = $macro;
+        if (is_object($macro) || is_callable($macro))
+            static::$macros[$name] = $macro;
+        else
+            throw new TypeError("macro must be object or callable.");
     }
 
-    public static function mixin(object | string $mixin): void
+    public static function mixin($mixin): void
     {
-        $methods = (new ReflectionClass($mixin))->getMethods(
-            ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_PROTECTED
-        );
+        if (is_object($mixin) || is_string($mixin)) {
+            $methods = (new ReflectionClass($mixin))->getMethods(
+                ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_PROTECTED
+            );
 
-        foreach ($methods as $method) {
-            $method->setAccessible(true);
+            foreach ($methods as $method) {
+                $method->setAccessible(true);
 
-            static::macro($method->name, $method->invoke($mixin));
+                static::macro($method->name, $method->invoke($mixin));
+            }
         }
+        else
+            throw new TypeError("mixin must be object or string.");
     }
 
     public static function hasMacro(string $name): bool
