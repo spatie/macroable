@@ -52,7 +52,7 @@ $macroableClass = new class() {
 
 $macroableClass::macro('concatenate', function(... $strings) {
    return implode('-', $strings);
-};
+});
 
 $macroableClass->concatenate('one', 'two', 'three'); // returns 'one-two-three'
 ```
