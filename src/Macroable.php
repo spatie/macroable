@@ -6,17 +6,28 @@ use Closure;
 use ReflectionClass;
 use ReflectionMethod;
 use BadMethodCallException;
+use InvalidArgumentException;
 
 trait Macroable
 {
     protected static array $macros = [];
 
-    public static function macro(string $name, object | callable $macro): void
+    public static function macro(string $name, object | callable $macro, bool $replace = true): void
     {
+        if (! $replace) {
+            if (method_exists(static::class, $name)) {
+                throw new InvalidArgumentException("Method `{$name}` already exists.");
+            }
+    
+            if (static::hasMacro($name)) {
+                throw new InvalidArgumentException("Macro `{$name}` already exists.");
+            }
+        }
+
         static::$macros[$name] = $macro;
     }
 
-    public static function mixin(object | string $mixin): void
+    public static function mixin(object | string $mixin, bool $replace = true): void
     {
         $methods = (new ReflectionClass($mixin))->getMethods(
             ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_PROTECTED
@@ -25,7 +36,7 @@ trait Macroable
         foreach ($methods as $method) {
             $method->setAccessible(true);
 
-            static::macro($method->name, $method->invoke($mixin));
+            static::macro($method->name, $method->invoke($mixin), $replace);
         }
     }
 
@@ -42,7 +53,7 @@ trait Macroable
     public static function __callStatic($method, $parameters)
     {
         if (! static::hasMacro($method)) {
-            throw new BadMethodCallException("Method {$method} does not exist.");
+            throw new BadMethodCallException("Method `{$method}` does not exist.");
         }
 
         $macro = static::$macros[$method];
@@ -57,7 +68,7 @@ trait Macroable
     public function __call($method, $parameters)
     {
         if (! static::hasMacro($method)) {
-            throw new BadMethodCallException("Method {$method} does not exist.");
+            throw new BadMethodCallException("Method `{$method}` does not exist.");
         }
 
         $macro = static::$macros[$method];

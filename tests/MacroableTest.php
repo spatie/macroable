@@ -3,6 +3,7 @@
 namespace Spatie\Macroable\Test;
 
 use BadMethodCallException;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Macroable\Macroable;
 
@@ -22,6 +23,11 @@ class MacroableTest extends TestCase
             private static function getPrivateStatic()
             {
                 return 'privateStaticValue';
+            }
+
+            public function publicMethod()
+            {
+                return 'publicMethodValue';
             }
         };
     }
@@ -133,6 +139,40 @@ class MacroableTest extends TestCase
         $this->macroableClass::flushMacros();
 
         $this->macroableClass::newMethod();
+    }
+
+    /** @test */
+    public function it_can_add_a_mixin_if_replace_is_false_and_method_doesnt_exist()
+    {
+        $this->macroableClass::macro('newMethod', function () {
+            return 'newValue';
+        }, false );
+
+        $this->assertEquals('newValue', $this->macroableClass->newMethod());
+    }
+
+    /** @test */
+    public function it_will_throw_an_exception_if_replace_is_false_and_method_already_exists()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->macroableClass::macro('publicMethod', function () {
+            return 'newPublicMethodValue';
+        }, false );
+    }
+
+    /** @test */
+    public function it_will_throw_an_exception_if_replace_is_false_and_macro_already_exists()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->macroableClass::macro('newMacro', function () {
+            return 'macroValue';
+        } );
+
+        $this->macroableClass::macro('newMacro', function () {
+            return 'macroValue';
+        }, false );
     }
 
     protected function getMixinClass()
