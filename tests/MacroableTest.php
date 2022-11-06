@@ -25,6 +25,13 @@ class MacroableTest extends TestCase
             }
         };
     }
+    
+    protected function tearDown(): void
+    {
+        $this->macroableClass::flushMacros();
+
+        parent::tearDown();
+    }
 
     /** @test */
     public function a_new_macro_can_be_registered_and_called()
@@ -112,6 +119,20 @@ class MacroableTest extends TestCase
         $this->expectException(BadMethodCallException::class);
 
         $this->macroableClass::nonExistingMethod();
+    }
+
+    /** @test */
+    public function it_can_flush_all_macros()
+    {
+        $this->macroableClass::macro('newMethod', function () {
+            return 'newValue';
+        } );
+
+        $this->expectException(BadMethodCallException::class);
+
+        $this->macroableClass::flushMacros();
+
+        $this->macroableClass::newMethod();
     }
 
     protected function getMixinClass()

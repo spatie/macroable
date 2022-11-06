@@ -34,6 +34,11 @@ trait Macroable
         return isset(static::$macros[$name]);
     }
 
+    public static function flushMacros(): void
+    {
+        static::$macros = [];
+    }
+
     public static function __callStatic($method, $parameters)
     {
         if (! static::hasMacro($method)) {
