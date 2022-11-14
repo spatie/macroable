@@ -19,6 +19,7 @@
         "php": "^8.0"
     },
     "require-dev": {
+        "pestphp/pest": "^1.22",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
@@ -35,6 +36,9 @@
         "test": "vendor/bin/phpunit"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }
