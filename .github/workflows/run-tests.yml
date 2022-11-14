@@ -32,7 +32,7 @@ jobs:
               run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
             - name: Configure matchers
-              uses: mheap/phpunit-matcher-action@master
+              uses: mheap/phpunit-matcher-action@main
 
             - name: Execute tests
-              run: vendor/bin/phpunit --teamcity
+              run: vendor/bin/pest --teamcity
