@@ -4,14 +4,14 @@ on:
     push:
     pull_request:
     schedule:
-        - cron: '0 0 * * *'
+        - cron: "0 0 * * *"
 
 jobs:
     test:
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
-                php: [8.0, 8.1, 8.2]
+                php: [8.2, 8.3, 8.4, 8.5]
                 dependency-version: [prefer-lowest, prefer-stable]
                 os: [ubuntu-latest, windows-latest]
 
