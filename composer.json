@@ -19,8 +19,8 @@
         "php": "^8.0"
     },
     "require-dev": {
-        "pestphp/pest": "^1.22",
-        "phpunit/phpunit": "^9.5"
+        "pestphp/pest": "^4",
+        "phpunit/phpunit": "^12"
     },
     "autoload": {
         "psr-4": {
