@@ -16,11 +16,11 @@
         }
     ],
     "require": {
-        "php": "^8.2"
+        "php": "^8.3"
     },
     "require-dev": {
-        "pestphp/pest": "^3",
-        "phpunit/phpunit": "^11"
+        "pestphp/pest": "^4",
+        "phpunit/phpunit": "^12"
     },
     "autoload": {
         "psr-4": {
