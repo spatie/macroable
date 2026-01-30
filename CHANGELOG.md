@@ -2,6 +2,16 @@
 
 All notable changes to `macroable` will be documented in this file
 
+## 2.1.0 - 2026-01-30
+
+### What's Changed
+
+- Add PHP 8.5 support by fixing `ReflectionMethod::setAccessible()` deprecation warning
+- Upgrade minimum PHP version to 8.3
+- Upgrade to Pest 4 and PHPUnit 12
+
+**Full Changelog**: https://github.com/spatie/macroable/compare/2.0.0...2.1.0
+
 ## 3.0.0 - 2026-01-30
 
 ### What's Changed
